@@ -1,19 +1,30 @@
-// Last edited 15/07/2021
-// This is the latest version of the script
 
 [Soldier1, MyBox, true] spawn {
 
 	params["_from","_to","_remove"]; 
-		 
+	
+	// Copy from here for console execution, which is the only this works right now
+	// The cargo space of the object seems to be a problem, the function works
+	// but the amount of equipment it picks up makes any normal storage overloaded
+	
 	_bodies = allDeadMen;
 	_to = cursorTarget;
 	_remove = true;
+	_pickWeaponInInventory = true;
+	_pickMagazinesInWeapon = true;
+	_pickHelmet = true;
+	_pickVest= true;
+	_pickWeaponOnFloor = true;
+	_pickBackPack = true;
+	_pickNVGTools = true;
 
 {
 	_from = _x;
 	
 // Weapons - that works
-	
+
+if 	(_pickWeaponInInventory == true) then {
+
 	// Weapons in the inventory of the body
 	_weaponsHeld = weaponsItems _from; 
 	
@@ -31,9 +42,12 @@
 		};
 	
 	};
+};
 
 	
-// Magazines 
+// Magazines in weapons
+
+if (_pickMagazinesInWeapon == true) then {
 	
 	_mags = magazinesAmmo _from; 
 	
@@ -49,9 +63,12 @@
 			} else {hint "Container is full"; terminate _thisScript};
 		} forEach _mags; 
 	};
+};
 	
 // Helmets 
-	
+
+if (_pickHelmet == true) then {
+
 	_helmet = headgear _from; 
 	
 	if (count _helmet > 0) then {  
@@ -65,8 +82,18 @@
 	
 			} else {hint "Container is full"; terminate _thisScript};
 	};
+};
 	
-// Vests 
+// Vests - sifting Ammo then the vest itself
+
+if	(_pickVest == true) then {
+	
+	_content = vestItems _from;
+	{
+		_ToAddToCargo = [_x, 1];
+		_to addItemCargoGlobal _ToAddToCargo;
+		
+	} forEach _content;
 	
 	_vest = vest _from; 
 	
@@ -80,9 +107,11 @@
 			};
 			} else {hint "Container is full"; terminate _thisScript};
 	};
+};
 	
 // NVGs
 
+if (_pickNVGTools == true) then {
 	_nvg = hmd _from; 
 	
 	if (count _nvg > 0) then {  
@@ -113,8 +142,11 @@
 			} else {hint "Container is full"; terminate _thisScript};
 		} forEach _items; 
 	};
+};
 	
 // Backpacks
+
+if (_pickBackPack == true) then {
 
 	_backpack = backpack _from;
 	
@@ -131,9 +163,13 @@
 	
 	hint "All equipment picked-up";
 	
+};
+	
 } forEach _bodies;
 
 // Weapons on the floor at 500m
+
+if (_pickWeaponOnFloor == true) then {
 
 	private _allStuff = [
 		[], // Weapons
@@ -209,5 +245,9 @@
 		}forEach (_allStuff select 3);
 		
 	hint "All weapons picked up";
+	
+};
+	
+	// Stop copy here for manual execution 
 
 };
