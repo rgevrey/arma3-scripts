@@ -1,22 +1,22 @@
-// Last edited 15/07/2021
-// This is the latest version of the script
 
 [Soldier1, MyBox, true] spawn {
 
 	params["_from","_to","_remove"]; 
 	
-	// Copy from here for console execution
+	// Copy from here for console execution, which is the only this works right now
+	// The cargo space of the object seems to be a problem, the function works
+	// but the amount of equipment it picks up makes any normal storage overloaded
 	
 	_bodies = allDeadMen;
 	_to = cursorTarget;
 	_remove = true;
-	_pickWeaponInInventory = false;
-	_pickMagazinesInWeapon = false;
-	_pickHelmet = false;
+	_pickWeaponInInventory = true;
+	_pickMagazinesInWeapon = true;
+	_pickHelmet = true;
 	_pickVest= true;
-	_pickWeaponOnFloor = false;
-	_pickBackPack = false;
-	_pickNVGTools = false;
+	_pickWeaponOnFloor = true;
+	_pickBackPack = true;
+	_pickNVGTools = true;
 
 {
 	_from = _x;
