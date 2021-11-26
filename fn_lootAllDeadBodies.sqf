@@ -14,6 +14,7 @@
 	_pickMagazinesInWeapon = true;
 	_pickHelmet = true;
 	_pickVest= true;
+	_pickUniform = true;
 	_pickWeaponOnFloor = true;
 	_pickBackPack = true;
 	_pickNVGTools = true;
@@ -108,7 +109,19 @@ if	(_pickVest == true) then {
 			} else {hint "Container is full"; terminate _thisScript};
 	};
 };
+
+// Uniforms - picks up the pockets of the uniform!
+
+if (_pickUniform == true) then {
+
+	_content = uniformItems _from;
+	{
+		_ToAddToCargo = [_x, 1];
+		_to addItemCargoGlobal _ToAddToCargo;
 	
+	} forEach _content;
+
+};
 // NVGs
 
 if (_pickNVGTools == true) then {
