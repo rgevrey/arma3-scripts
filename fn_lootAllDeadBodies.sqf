@@ -17,6 +17,7 @@
 	_pickVest= true;
 	_pickUniform = true;
 	_pickWeaponOnFloor = true;
+	_pickWeaponDistance = 500; 
 	_pickBackPack = true;
 	_pickNVGTools = true;
 	
@@ -193,7 +194,7 @@ if (_pickBackPack == true) then {
 	
 } forEach _bodies;
 
-// Weapons on the floor at 500m
+// Weapons on the floor at specified distance
 
 if (_pickWeaponOnFloor == true) then {
 
@@ -206,7 +207,7 @@ if (_pickWeaponOnFloor == true) then {
 
 	private ["_className", "_classNames", "_index", "_predicate", "_quantities", "_quantity", "_stuff", "_stuffOfType", "_stuffType", "_values", "_weaponHolder", "_weaponHolders"];
 
-	_weaponHolders = (nearestObjects [player, ["WeaponHolder", "WeaponHolderSimulated"], 500]);
+	_weaponHolders = (nearestObjects [player, ["WeaponHolder", "WeaponHolderSimulated"], _pickWeaponDistance]);
 
 	{
 		_weaponHolder = _x;
