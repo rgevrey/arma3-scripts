@@ -10,6 +10,7 @@
 	_bodies = allDeadMen;
 	_to = cursorTarget;
 	_remove = true;
+	_createContainer = true; 
 	_pickWeaponInInventory = true;
 	_pickMagazinesInWeapon = true;
 	_pickHelmet = true;
@@ -18,6 +19,18 @@
 	_pickWeaponOnFloor = true;
 	_pickBackPack = true;
 	_pickNVGTools = true;
+	
+// Container storage is a big limitation because of how powerful this script is
+// This creates a crate from the Old Man DLC that has an infinite (or looks infinite) storage
+// The idea is then to move or load the box into a truck, ideally via ACE interactions
+
+if (_createContainer == true) then {
+
+	_magicBox = createVehicle ["VirtualReammoBox_small_F", position player, [], 0, "NONE"];
+	_to = _magicBox;
+
+};	
+
 
 {
 	_from = _x;
