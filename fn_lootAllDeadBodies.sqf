@@ -17,6 +17,7 @@
 	_pickVest= true;
 	_pickUniform = true;
 	_pickWeaponOnFloor = true;
+	_pickWeaponDistance = 500; 
 	_pickBackPack = true;
 	_pickNVGTools = true;
 	
@@ -193,7 +194,8 @@ if (_pickBackPack == true) then {
 	
 } forEach _bodies;
 
-// Weapons on the floor at 500m
+// Weapons on the floor at specified distance
+// This bit of code is 99% not from me and I have to find where I found it so I can reference it
 
 if (_pickWeaponOnFloor == true) then {
 
@@ -206,7 +208,7 @@ if (_pickWeaponOnFloor == true) then {
 
 	private ["_className", "_classNames", "_index", "_predicate", "_quantities", "_quantity", "_stuff", "_stuffOfType", "_stuffType", "_values", "_weaponHolder", "_weaponHolders"];
 
-	_weaponHolders = (nearestObjects [player, ["WeaponHolder", "WeaponHolderSimulated"], 500]);
+	_weaponHolders = (nearestObjects [player, ["WeaponHolder", "WeaponHolderSimulated"], _pickWeaponDistance]);
 
 	{
 		_weaponHolder = _x;
@@ -254,6 +256,13 @@ if (_pickWeaponOnFloor == true) then {
 			getItemCargo _weaponHolder,
 			getBackpackCargo _weaponHolder
 		];
+		
+		if (_remove == true) then {
+		
+			deleteVehicle _weaponHolder;
+		
+		};
+		
 	} forEach _weaponHolders;
 
 
@@ -270,7 +279,7 @@ if (_pickWeaponOnFloor == true) then {
 		else {hint "Container is full"; terminate _thisScript};
 		}forEach (_allStuff select 3);
 		
-	hint "All weapons picked up";
+	hint "Looting complete";
 	
 };
 	
