@@ -107,7 +107,7 @@ if (_createContainer == true) then {
 		_content = vestItems _from;
 		{
 			_to addItemCargoGlobal [_x, 1];
-			systemChat _x;
+			// systemChat _x;
 			
 		} forEach _content;
 		
@@ -117,7 +117,7 @@ if (_createContainer == true) then {
 			if (_to canAdd _vest) then {
 					_to addItemCargoGlobal [_vest,1];
 					
-					systemChat _vest;
+					// systemChat _vest;
 					
 				// Removes the item if asked
 				//if (_remove == true) then {
